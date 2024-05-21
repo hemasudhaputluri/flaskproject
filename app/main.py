@@ -26,5 +26,14 @@ def graph():
     
     return render_template('graph.html', graph=graph_html)
 
+@app.route('/about')
+def about():
+    # Render the about.html template
+    return render_template('about.html')
+
+@app.route('/projects')
+def projects():
+    # Render the projects.html template
+    return render_template('projects.html')
 if __name__ == '__main__':
     app.run()
