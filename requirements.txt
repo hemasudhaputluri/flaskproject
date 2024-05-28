@@ -2,5 +2,4 @@ Flask
 pandas
 plotly
 gunicorn
-request
 numpy
