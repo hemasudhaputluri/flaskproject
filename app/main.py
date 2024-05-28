@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 port = int(os.environ.get('PORT', 10000))  # Adjusted the default port
 
+# Load the pre-trained model
+with open('model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
+    
 @app.route('/')
 def index():
     # Load CSV data
@@ -35,5 +39,27 @@ def about():
 def projects():
     # Render the projects.html template
     return render_template('projects.html')
+
+@app.route('/placement', methods=['GET', 'POST'])
+def placement():
+    if request.method == 'POST':
+        # Get form data
+        if_ = request.form['if']
+        cgpa = request.form['cgpa']
+
+        # Convert form data to float and create a feature array
+        features = np.array([[float(if_), float(cgpa)]])
+
+        # Predict using the model
+        prediction = model.predict(features)
+
+        # Convert prediction to a human-readable form
+        result = 'Placed' if prediction[0] == 1 else 'Not Placed'
+
+        # Render the result
+        return render_template('result.html', result=result)
+    
+    # Render the input form
+    return render_template('form.html')
 if __name__ == '__main__':
     app.run()
