@@ -66,5 +66,15 @@ def placement():
     
     # Render the input form
     return render_template('form.html')
+@app.route('/projects')
+def projects():
+    return render_template('projects.html', projects=projects)
+
+@app.route('/project/<int:id>')
+def project_detail(id):
+    project = next((proj for proj in projects if proj['id'] == id), None)
+    if project is None:
+        return "Project not found", 404
+    return render_template('form.html')
 if __name__ == '__main__':
     app.run()
