@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Prediction Result</title>
-</head>
-<body>
+<!-- templates/result.html -->
+{% extends "base.html" %}
+
+{% block title %}
+    Prediction Result - My Flask App
+{% endblock %}
+
+{% block content %}
     <h1>Prediction Result</h1>
     <p>The student will be: {{ result }}</p>
-    <a href="/placement">Back to Form</a>
-</body>
-</html>
+    <a href="{{ url_for('placement') }}" class="btn btn-primary">Back to Form</a>
+{% endblock %}
