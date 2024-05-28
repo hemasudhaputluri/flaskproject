@@ -7,8 +7,13 @@ app = Flask(__name__)
 
 port = int(os.environ.get('PORT', 10000))  # Adjusted the default port
 
+# Sample project data
+projects = [
+    {'id': 1, 'title': 'Student Placement Prediction', 'description': 'Predict if a student will get placed based on their interview feedback and CGPA.'}
+]
+
 # Load the pre-trained model
-with open('model.pkl', 'rb') as model_file:
+with open('./model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
     
 @app.route('/')
