@@ -51,15 +51,12 @@ def about():
 def project_list():
     return render_template('projects.html', projects=projects)
 
-@app.route('/project/<int:id>')
+@app.route('/project/<int:id>', methods=['GET', 'POST'])
 def project_detail(id):
     project = next((proj for proj in projects if proj['id'] == id), None)
     if project is None:
         return "Project not found", 404
-    return render_template('projectdetail.html', project=project)
-
-@app.route('/placement', methods=['GET', 'POST'])
-def placement():
+    
     if request.method == 'POST':
         # Get form data
         if_ = request.form['if']
@@ -77,9 +74,8 @@ def placement():
 
         # Render the result
         return render_template('result.html', result=result)
-    
-    # Render the input form
-    return render_template('form.html')
+
+    return render_template('project_detail.html', project=project)
 
 if __name__ == '__main__':
     app.run(port=port)
