@@ -56,7 +56,7 @@ def project_detail(id):
     project = next((proj for proj in projects if proj['id'] == id), None)
     if project is None:
         return "Project not found", 404
-    return render_template('project_detail.html', project=project)
+    return render_template('projectdetail.html', project=project)
 
 @app.route('/placement', methods=['GET', 'POST'])
 def placement():
